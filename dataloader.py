@@ -63,6 +63,6 @@ class RetinopathyLoader(data.Dataset):
         normalizedImg = cv2.normalize(img,  normalizedImg, 0, 1, cv2.NORM_MINMAX, dtype=cv2.CV_32F)
         normalizedImg = np.reshape(normalizedImg, (3, 512, 512))
         normalizedImg = torch.from_numpy(normalizedImg)
-        label = torch.from_numpy(label)
+        label = torch.from_numpy(np.array([label]))
 
         return normalizedImg, label
