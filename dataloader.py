@@ -3,6 +3,7 @@ from torch.utils import data
 import numpy as np
 import torch
 import cv2
+from torch.utils.data import DataLoader
 
 def getData(mode):
     if mode == 'train':
@@ -58,7 +59,6 @@ class RetinopathyLoader(data.Dataset):
         img = cv2.imread(img_path)
 
         label = self.label[index] 
-
         normalizedImg = np.zeros((512, 512, 3))
         normalizedImg = cv2.normalize(img,  normalizedImg, 0, 1, cv2.NORM_MINMAX, dtype=cv2.CV_32F)
         normalizedImg = np.reshape(normalizedImg, (3, 512, 512))
@@ -66,3 +66,4 @@ class RetinopathyLoader(data.Dataset):
         label = torch.from_numpy(np.array([label]))
 
         return normalizedImg, label
+
