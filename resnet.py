@@ -44,8 +44,8 @@ ResNet50_1.fc = nn.Linear(2048, 5)
 ResNet50_2 = torchvision.models.resnet50(pretrained=True)
 ResNet50_2.fc = nn.Linear(2048, 5)
 
-models = [ResNet18_1, ResNet18_2]
-#models = [ResNet18_1, ResNet18_2, ResNet50_1, ResNet50_2]
+#models = [ResNet50_1, ResNet50_2]
+models = [ResNet18_1, ResNet18_2, ResNet50_1, ResNet50_2]
 device = torch.device('cuda')
 
 def train(model):
@@ -100,8 +100,7 @@ for i, model in enumerate(models):
     weight = copy.deepcopy(model.state_dict())
 
     if i == 0:
-        #epochs = epochs_18
-        epochs = 3
+        epochs = epochs_18
         plt.figure(1)
     if i == 2:
         epochs = epochs_50
@@ -118,7 +117,7 @@ for i, model in enumerate(models):
         print('-' * 10)
     
     model_weight.append(weight)
-    print('Best Acc: {:4f}%'.format(best_acc))
+    print('Best Acc: {:2f}%'.format(best_acc))
     if i < 2:
         plt.plot(range(epochs), train_acc, label=legend[2*i])
         plt.plot(range(epochs), test_acc, label=legend[2*i+1])
