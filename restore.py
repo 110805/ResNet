@@ -53,7 +53,7 @@ def restore(model, i):
     sn.heatmap(df_cm, annot=True, annot_kws={"size": 16}) # font size
     plt.savefig('{}.png'.format(i))
 
-restore(ResNet18_1, 1)
+#restore(ResNet18_1, 1)
 restore(ResNet18_2, 2)
 #restore(ResNet_50_1, 3)
 #restore(ResNet_50_1, 4)
