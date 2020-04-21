@@ -3,7 +3,10 @@ from torch.utils import data
 import numpy as np
 import torch
 import cv2
+import PIL.Image as Image
 from torch.utils.data import DataLoader
+from torchvision import transforms
+import torch.nn.functional as F
 
 def getData(mode):
     if mode == 'train':
@@ -56,14 +59,18 @@ class RetinopathyLoader(data.Dataset):
             step4. Return processed image and label
         """
         img_path = self.root + self.img_name[index] + '.jpeg'
-        img = cv2.imread(img_path)
-
-        label = self.label[index] 
+        img = Image.open(img_path)
+        label = self.label[index]
+        '''
         normalizedImg = np.zeros((512, 512, 3))
         normalizedImg = cv2.normalize(img,  normalizedImg, 0, 1, cv2.NORM_MINMAX, dtype=cv2.CV_32F)
         normalizedImg = np.reshape(normalizedImg, (3, 512, 512))
         normalizedImg = torch.from_numpy(normalizedImg)
+        '''
         label = torch.from_numpy(np.array([label]))
+        img = transforms.ToTensor()(img)
+        img = img.view(3,512,512)
+        #out = F.interpolate(img, size=64)
 
-        return normalizedImg, label
+        return img, label
 

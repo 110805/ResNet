@@ -25,8 +25,8 @@ ResNet50_2.fc = nn.Linear(2048, 5)
 
 ResNet18_1.load_state_dict(torch.load('0.pkl'))
 ResNet18_2.load_state_dict(torch.load('1.pkl'))
-ResNet50_1.load_state_dict(torch.load('2.pkl'))
-ResNet50_2.load_state_dict(torch.load('3.pkl'))
+#ResNet50_1.load_state_dict(torch.load('2.pkl'))
+#ResNet50_2.load_state_dict(torch.load('3.pkl'))
 
 device = torch.device('cuda')
 def restore(model, i):
@@ -53,7 +53,7 @@ def restore(model, i):
     sn.heatmap(df_cm, annot=True, annot_kws={"size": 16}) # font size
     plt.savefig('{}.png'.format(i))
 
-restore(ResNet_18_1, 1)
-restore(ResNet_18_2, 2)
-restore(ResNet_50_1, 3)
-restore(ResNet_50_1, 4)
+restore(ResNet18_1, 1)
+restore(ResNet18_2, 2)
+#restore(ResNet_50_1, 3)
+#restore(ResNet_50_1, 4)
